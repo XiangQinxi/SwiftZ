@@ -5,6 +5,9 @@ https://swiftz.streamlit.app/
 
 文件临时托管，使用`Streamlit`构建的应用程序。
 
+## 捐赠
+![image](pages/微信捐赠.png)
+
 ## 感谢
 这里感谢`Streamlit Cloud`提供免费的社区平台！
 

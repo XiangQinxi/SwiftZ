@@ -35,6 +35,25 @@ incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
 nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 """
 
+st.subheader("联系我")
+st.markdown(
+    """
+    QQ: [`1379773753`](https://wpa.qq.com/msgrd?v=3&uin=1379773753&site=qq&menu=yes)
+    
+    Wechat微信: [`aquaref`](https://weixin.qq.com/r/aquaref)
+    
+    Telegram电报: `xiangqinxi`
+    
+    BiliBili: [`471425191`](https://space.bilibili.com/471425191)
+    
+    Blog: [`xiangqinxi.github.io`](https://xiangqinxi.github.io)
+    
+    Paypal: [`xiangqinxi`](https://paypal.me/xiangqinxi?country.x=C2&locale.x=zh_XC)
+    """
+)
+
+st.image("pages/微信捐赠.png", caption="我的二维码", width=300)
+
 st.subheader("你是否再找")
 if st.button("上传单文件", type="primary", use_container_width=True):
     st.switch_page("pages/📤上传(单文件).py")
