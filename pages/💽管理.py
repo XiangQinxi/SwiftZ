@@ -7,6 +7,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+st.logo("pages/LOGO.png")
+
 st.title("SwiftZ · 管理")
 
 st.info("本区为管理员专属设置区域，需要密码才可管理")

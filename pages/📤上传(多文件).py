@@ -7,6 +7,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+st.logo("pages/LOGO.png")
+
 with st.sidebar:
     from json import loads
 

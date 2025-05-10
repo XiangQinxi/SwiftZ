@@ -10,6 +10,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+st.logo("pages/LOGO.png")
+
 # 在侧边栏中添加一个可展开的容器
 with st.sidebar:
     from json import loads
