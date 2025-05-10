@@ -11,6 +11,9 @@ https://swiftz.streamlit.app/
 还有以下依赖库感谢：
 `streamlit-extras`
 
+`streamlit-shadcn-ui`
+提供优美的标签组件
+
 `filetype`
 为文件上传/下载的预览提供文件识别
 
