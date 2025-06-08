@@ -15,6 +15,8 @@ ui.badges(
 前身为`Packages`项目
 """
 
+st.warning("暂时我们还未做文件密码加密，但临时文本加密做好了")
+
 st.divider()
 
 st.warning(

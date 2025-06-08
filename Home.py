@@ -10,15 +10,15 @@ st.set_page_config(
 st.logo("LOGO.png")
 
 pages = {
-    "主页": [st.Page("main.py", title="主页")],
+    "主页": [st.Page("main.py", title="主页", icon=":material/home_filled:")],
     "文件": [
-        st.Page("upload.py", title="上传单文件"),
-        st.Page("upload_multiple.py", title="上传多文件"),
-        st.Page("download.py", title="下载文件"),
+        st.Page("upload.py", title="上传单文件", icon=":material/cloud_upload:"),
+        st.Page("upload_multiple.py", title="上传多文件", icon=":material/cloud_upload:"),
+        st.Page("download.py", title="下载文件", icon=":material/cloud_download:"),
     ],
-    "文本": [st.Page("temptext.py", title="临时文本")],
+    "文本": [st.Page("temptext.py", title="临时文本", icon=":material/article:")],
     "用户": [
-        st.Page("manage.py", title="管理员管理"),
+        st.Page("manage.py", title="管理员管理", icon=":material/manage_accounts:"),
     ],
 }
 
@@ -35,12 +35,12 @@ with st.sidebar:
 
     with st.expander(f"查询到的所有文件", True):
         for name in data:
-            st.divider()
             st.subheader(name)
             try:
                 st.text(data[name]["description"])
             except:
                 pass
+            st.divider()
         st.empty()
 
     with st.expander(f"查询到的所有临时文本", True):
