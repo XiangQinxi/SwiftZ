@@ -5,20 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a43b61e9-14cd-46a9-b622-bdb29a41dd6a" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/SwiftZ.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.streamlit/config.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Home.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/data.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/管理.py" afterPathEscaped="$PROJECT_DIR$/pages/💽管理.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/上传(单文件).py" afterPathEscaped="$PROJECT_DIR$/pages/📤上传(单文件).py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/上传(多文件).py" afterPathEscaped="$PROJECT_DIR$/pages/📤上传(多文件).py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/下载.py" afterPathEscaped="$PROJECT_DIR$/pages/📥下载.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temptext.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/texts.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Home.py" beforeDir="false" afterPath="$PROJECT_DIR$/Home.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/LOGO.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/微信捐赠.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/管理.py" beforePathEscaped="$PROJECT_DIR$/pages/💽管理.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/上传(单文件).py" beforePathEscaped="$PROJECT_DIR$/pages/📤上传(单文件).py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/上传(多文件).py" beforePathEscaped="$PROJECT_DIR$/pages/📤上传(多文件).py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/下载.py" beforePathEscaped="$PROJECT_DIR$/pages/📥下载.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +32,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "XiangQinxi"
+  }
 }]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:/XiangQinxi/SwiftZ.git",
+    "accountId": "c81241d1-8ade-4a3f-9cd3-c55c47a8a2d8"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2wtUuFDTpcBmVk4F8AGqbodfYd8" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -46,17 +55,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/SwiftZ",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/SwiftZ&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\SwiftZ" />
