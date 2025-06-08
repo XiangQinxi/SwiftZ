@@ -52,3 +52,5 @@ if st.button("上传多文件", type="primary", use_container_width=True):
     st.switch_page("upload_multiple.py")
 if st.button("下载文件", type="primary", use_container_width=True):
     st.switch_page("download.py")
+if st.button("临时文本", type="primary", use_container_width=True):
+    st.switch_page("temptext.py")

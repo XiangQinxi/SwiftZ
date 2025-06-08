@@ -2,15 +2,6 @@ from json import loads
 
 import streamlit as st
 
-# 设置页面配置
-"""st.set_page_config(
-    page_title="SwiftZ · Download",
-    page_icon="🗃️",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)"""
-
-#st.logo("pages/LOGO.png")
 
 # 在侧边栏中添加一个可展开的容器
 with st.sidebar:

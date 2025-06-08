@@ -21,7 +21,7 @@ with st.expander("文本发布", expanded=True):
     c1, c2, c3 = st.columns(3, vertical_alignment="bottom", gap="large")
 
     with c1:
-        way = st.selectbox("选择加密算法", ["无", "SHA256"])
+        way = st.selectbox("选择加密算法", ["无", "SHA256"], index=1)
     with c2:
         if way != "无":
             password = st.text_input(label="密码", value="", type="password", help="仅当选择加密算法时有效")
@@ -34,13 +34,20 @@ with st.expander("文本发布", expanded=True):
 
             if title in texts:
                 st.warning("标题重复！")
+            elif password == "":
+                st.warning("密码不能为空！")
             else:
                 with open("texts.json", "w") as textjson2:
                     from json import dumps
 
                     texts2 = texts
                     texts2[title] = ({"text": text, "password": hashed_password})
-                    textjson2.write(dumps(texts2, sort_keys=True, indent=4, separators=(',', ': ')))
+                    try:
+                        textjson2.write(dumps(texts2, sort_keys=True, indent=4, separators=(',', ': ')))
+                    except:
+                        pass
+                    else:
+                        st.success("发布成功！")
 
     if way == "无":
         st.warning("警告！这将会导致你的文本内容泄露，请谨慎选择！")
