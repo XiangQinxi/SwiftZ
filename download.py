@@ -3,31 +3,6 @@ from json import loads
 import streamlit as st
 
 
-# 在侧边栏中添加一个可展开的容器
-with st.sidebar:
-    from json import loads
-
-    # 打开data.json文件
-    _data2 = open("packages/data.json", "r", encoding="utf-8")
-    data = loads(_data2.read())
-    _data2.close()
-
-    # 在可展开的容器中添加一个标题
-    with st.expander(f"查询到的所有文件", True):
-        # 遍历data中的所有键
-        for name in data:
-            # 添加一个分割线
-            st.divider()
-            # 添加一个子标题
-            st.subheader(name)
-            try:
-                # 添加一个文本框，显示data中对应键的description值
-                st.text(data[name]["description"])
-            except:
-                pass
-        # 添加一个空容器
-        st.empty()
-
 # 添加一个标题
 st.title("SwiftZ · 下载文件")
 

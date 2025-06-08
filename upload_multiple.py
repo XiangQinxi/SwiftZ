@@ -17,15 +17,24 @@ with st.form("upload"):
     print(uploaded_files)
     with st.container():
         if st.form_submit_button("上传", use_container_width=True):
+            with open("packages/data.json", "r", encoding="utf-8") as _data:
+                from json import loads
+                data = loads(_data.read())
+                _data.close()
+
             if uploaded_files is not None:
                 print(f"[{uploaded_files}]", "文件准备上传中...")
                 from os.path import exists
 
                 _f = []
+
+                status = st.status("文件上传", expanded=True)
+
                 for file in uploaded_files:
 
                     if file.name in data or exists(f"packages/{file.name}"):
-                        st.warning(f"文件库中已有{file.name}")
+                        status.text(f"文件库中已有{file.name}！上传文件{file.name}失败！")
+                        st.error(f"{file.name}上传失败！文件库中已有该文件")
                         print(f"[{file.name}]", "文件上传错误！文件库中已有此文件")
                     else:
                         bytes_data = file.read()
@@ -35,17 +44,21 @@ with st.form("upload"):
                         st.caption(f"文件类型：{file.type}")
                         print(f"[{file.name}]", "文件大小", file.size)
                         print(f"[{file.name}]", "文件类型", file.type)
+
+                        status.text(f"文件{file.name}准备上传")
     
                         try:
                             with open(f"packages/{file.name}", "wb+") as _File:
+                                status.text("文件{file.name}开始上传...")
                                 _File.write(bytes_data)
                                 _File.close()
                         except:
                             print(f"[{file.name}]", "文件上传错误！文件上传时发生错误")
-                            st.warning("文件上传时发生错误")
+                            status.text("文件{file.name}上传失败！")
                         else:
                             print(f"[{file.name}]", "文件上传成功！")
                             _f.append(file.name)
+                            status.text("文件{file.name}上传成功")
 
                 _data = data
                 if entry_name != "":
@@ -66,16 +79,21 @@ with st.form("upload"):
                     "path": _fps,
                 }
 
+                status.text("数据准备上传中...")
                 print(f"[{_name2}]", "数据准备上传中...")
                 try:
                     from json import dumps
+
+                    status.text("数据开始上传")
                     data1 = open(f"packages/data.json", "w", encoding="utf-8")
                     data1.write(dumps(_data, sort_keys=True, indent=4, separators=(',', ': ')))
                     data1.close()
                 except:
+                    status.update("数据上传失败！", state="error")
                     st.warning("数据上传失败！")
                     print(f"[{_name2}]", "数据上传失败！数据上传失败！")
                 else:
+                    status.update(label="数据与文件均上传成功", state="complete")
                     st.success("数据上传成功！")
                     print(f"[{_name2}]", "数据上传成功！")
 

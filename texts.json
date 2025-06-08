@@ -1,14 +1,6 @@
 {
-    "123": {
-        "password": "",
-        "text": "123"
-    },
     "1234": {
         "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
-        "text": "\u606d\u559c\u89e3\u5bc6\u6210\u529f\uff01"
-    },
-    "12345": {
-        "password": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
         "text": "\u606d\u559c\u89e3\u5bc6\u6210\u529f\uff01"
     }
 }
