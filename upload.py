@@ -1,30 +1,5 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="SwiftZ · Upload",
-    page_icon="🗃️",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
-
-st.logo("pages/LOGO.png")
-
-with st.sidebar:
-    from json import loads
-
-    with open("packages/data.json", "r", encoding="utf-8") as _data2:
-        data = loads(_data2.read())
-        _data2.close()
-
-    with st.expander(f"查询到的所有文件", True):
-        for name in data:
-            st.divider()
-            st.subheader(name)
-            try:
-                st.text(data[name]["description"])
-            except:
-                pass
-        st.empty()
 
 st.title("SwiftZ · 上传文件")
 
@@ -115,4 +90,4 @@ with st.form("upload"):
 
 st.subheader("你是否再找")
 if st.button("下载文件", type="primary", use_container_width=True):
-    st.switch_page("pages/📥下载.py")
+    st.switch_page("pages/download.py")

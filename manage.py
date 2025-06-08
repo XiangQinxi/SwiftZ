@@ -1,13 +1,5 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="SwiftZ · Manage",
-    page_icon="🗃️",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
-
-st.logo("pages/LOGO.png")
 
 st.title("SwiftZ · 管理")
 
@@ -37,11 +29,15 @@ with open("packages/data.json", "r") as _data:
     data = _data.read()
     _data.close()
 
+with open("texts.json", "r") as _datat:
+    datat = _datat.read()
+    _datat.close()
+
 if st.session_state["admin_login"] == "true":
     st.divider()
-    with st.expander("数据管理", expanded=True):
+    with st.expander("文件数据管理", expanded=True):
 
-        entry_df = st.text_input("删除数据名称")
+        entry_df = st.text_input("请输入删除文件及其文件数据名称")
         if st.button("删除", use_container_width=True):
             from os import remove
             from json import loads, dumps
@@ -104,3 +100,6 @@ if st.session_state["admin_login"] == "true":
                 with open("packages/data.json", "w+") as _data2:
                     _data2.write(entry_data)
                     _data2.close()
+    with st.expander("临时文本管理", expanded=True):
+        if st.button("获取文本数据", use_container_width=True):
+            st.json(datat)

@@ -3,14 +3,14 @@ from json import loads
 import streamlit as st
 
 # 设置页面配置
-st.set_page_config(
+"""st.set_page_config(
     page_title="SwiftZ · Download",
     page_icon="🗃️",
     layout="wide",
     initial_sidebar_state="collapsed"
-)
+)"""
 
-st.logo("pages/LOGO.png")
+#st.logo("pages/LOGO.png")
 
 # 在侧边栏中添加一个可展开的容器
 with st.sidebar:
@@ -178,7 +178,7 @@ with st.container():
 
 st.subheader("你是否再找")
 if st.button("上传单文件", type="primary", use_container_width=True):
-    st.switch_page("pages/📤上传(单文件).py")
+    st.switch_page("pages/upload.py")
 
 if st.button("上传多文件", type="primary", use_container_width=True):
-    st.switch_page("pages/📤上传(多文件).py")
+    st.switch_page("pages/upload_multiple.py")
