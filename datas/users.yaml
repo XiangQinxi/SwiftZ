@@ -1,0 +1,6 @@
+users:
+  1:
+    username: user1
+    password: 66666666
+    profile:
+      description: "这是一个用户"
