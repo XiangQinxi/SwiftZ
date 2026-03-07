@@ -1,8 +1,20 @@
-[theme]
-primaryColor="#ff9900"  # 白色
-backgroundColor="#202020"  # 深黑色
-secondaryBackgroundColor="#272727"  # 深灰色
-textColor="#ffffff"  # 白色
-
 [server]
+enableStaticServing = true
 runOnSave=true
+
+[theme]
+# Professional color palette
+primaryColor = "#f7630c"             # Deep navy blue - trust, stability, authority
+backgroundColor = "#fefefe"          # Off-white - softer than pure white, easier on eyes
+secondaryBackgroundColor = "#f8fafc" # Very light gray - subtle distinction
+textColor = "#1f2937"                # Charcoal gray - professional, highly readable
+linkColor = "#f7630c"                # Slightly lighter navy for links
+borderColor = "#d1d5db"              # Medium gray borders - clear definition
+showWidgetBorder = true
+baseRadius = "0.6px"              # Subtle rounding - professional but not sharp
+codeBackgroundColor = "#f3f4f6"      # Light gray code background
+showSidebarBorder = true
+
+[theme.sidebar]
+backgroundColor = "#f1f5f9"          # Light blue-gray - sophisticated sidebar
+secondaryBackgroundColor = "#e5e7eb" # Slightly darker for content sections

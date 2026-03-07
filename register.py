@@ -13,6 +13,7 @@ with st.form("register_form"):
     username = st.text_input("用户名")
     password = st.text_input("密码", type="password")
     confirm_password = st.text_input("确认密码", type="password")
+    st.caption("我们是不会收据您的隐私信息的，密码将会加密保存！")
 
     ok = st.form_submit_button("注册")
     if ok:
@@ -37,3 +38,6 @@ with st.form("register_form"):
                 cookie.set("user_id", user_id)
                 time.sleep(1)
                 st.switch_page("home.py")
+
+cookie.set("password", None)
+cookie.set("user_id", None)

@@ -4,3 +4,15 @@
     description: 管理员（就是本作者😏）
   role: ADMIN
   username: XiangQinxi
+2:
+  password: 3c56de56513378e245f5cd1f8298c17404ff651efc36e4260de9db36b1e2f086
+  profile:
+    description: 这个用户什么也没写...
+  role: ADMIN
+  username: Aquaref
+3:
+  password: 3c56de56513378e245f5cd1f8298c17404ff651efc36e4260de9db36b1e2f086
+  profile:
+    description: 这个用户什么也没写...
+  role: USER
+  username: 千秋
