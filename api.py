@@ -18,6 +18,10 @@ DATAS_DIR = Path("./datas")
 USERS_DIR = Path("./datas/users.yaml")
 
 
+def sha256_hash(password: str) -> str:
+    return sha256((password + SALT).encode()).hexdigest()
+
+
 def init_datas():
     if not exists(DATAS_DIR):
         mkdir(DATAS_DIR)
@@ -38,7 +42,19 @@ def save_users(users_dict):
         yaml.dump(users_dict, f, default_flow_style=False, allow_unicode=True)
 
 
+def verify_user(username, password) -> bool:
+    """True -> 账号及对应密码正确；False -> 不存在该账号，或密码错误"""
+    users = load_users()
+    for user_id, user_info in users.items():
+        if user_info["username"] == username and user_info["password"] == sha256_hash(
+            password
+        ):
+            return True
+    return False
+
+
 def register_1user(username, password) -> int | None:
+    """None -> 账号已存在"""
     users = load_users()
     for user_id, user_info in users.items():
         if user_info["username"] == username:
@@ -46,7 +62,7 @@ def register_1user(username, password) -> int | None:
     user_id = max(users.keys(), default=0) + 1
     users[user_id] = {
         "username": username,
-        "password": sha256((password + SALT).encode()).hexdigest(),
+        "password": sha256_hash(password),
         "profile": {},
     }
     save_users(users)
@@ -54,11 +70,11 @@ def register_1user(username, password) -> int | None:
 
 
 def login_1user(username, password) -> int | None:
+    """None -> 不存在该账号，或密码错误"""
     users = load_users()
     for user_id, user_info in users.items():
-        if (
-            user_info["username"] == username
-            and user_info["password"] == sha256((password + SALT).encode()).hexdigest()
+        if user_info["username"] == username and user_info["password"] == sha256_hash(
+            password
         ):
             return user_id
     return None

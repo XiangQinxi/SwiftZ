@@ -1,6 +1,9 @@
 import streamlit as st
+from streamlit_cookies_controller import CookieController
 
 import api
+
+cookie = CookieController()
 
 st.title("SwiftZ2 · 注册账号")
 
@@ -26,4 +29,7 @@ with st.form("register_form"):
             if user_id is None:
                 st.error("注册失败！该用户名已存在")
             else:
-                st.success(f"注册成功，用户ID为{user_id}")
+                st.success(f"注册成功，您的用户ID为{user_id}")
+                cookie.set("username", username)
+                cookie.set("password", password)
+                cookie.set("user_id", user_id)

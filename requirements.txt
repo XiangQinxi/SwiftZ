@@ -3,3 +3,4 @@ pyyaml
 filetype
 pyperclip
 toml
+streamlit-cookies-controller
