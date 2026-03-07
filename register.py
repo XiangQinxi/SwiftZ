@@ -1,4 +1,5 @@
 import streamlit as st
+
 import api
 
 st.title("SwiftZ2 · 注册账号")
