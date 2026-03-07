@@ -10,12 +10,17 @@ import yaml
 DEFAULT_USERS = {
     1: {
         "username": "XiangQinxi",
+        "role": "ADMIN",
         "password": "370da11bd2ade4807408a4d2ed5c0b18028e2415e888343cff5a65ced044eb4f",
-        "profile": {},
+        "profile": {
+            "description": "管理员（就是本作者😏）",
+        },
     }  # User ID
 }
 DATAS_DIR = Path("./datas")
 USERS_DIR = Path("./datas/users.yaml")
+PACKAGES_DATA_DIR = Path("./datas/packages.yaml")
+PACKAGES_DIR = Path("./packages")
 
 
 def sha256_hash(password: str) -> str:
@@ -30,7 +35,13 @@ def init_datas():
             f.write(
                 yaml.dump(DEFAULT_USERS, default_flow_style=False, allow_unicode=True)
             )
-
+    if not exists(PACKAGES_DIR):
+        mkdir(PACKAGES_DIR)
+    if not exists(PACKAGES_DATA_DIR):
+        with open(PACKAGES_DATA_DIR, "w+", encoding="utf-8") as f:
+            f.write(
+                yaml.dump({}, default_flow_style=False, allow_unicode=True)
+            )
 
 def load_users():
     with open(USERS_DIR, "r", encoding="utf-8") as file1:

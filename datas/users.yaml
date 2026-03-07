@@ -1,4 +1,6 @@
 1:
   password: 370da11bd2ade4807408a4d2ed5c0b18028e2415e888343cff5a65ced044eb4f
-  profile: {}
+  profile:
+    description: 管理员（就是本作者😏）
+  role: ADMIN
   username: XiangQinxi

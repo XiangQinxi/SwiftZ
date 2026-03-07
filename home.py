@@ -1,13 +1,13 @@
 import streamlit as st
 
-st.title("SwiftZ2 · 主页")
+state = st.session_state
 
-st.subheader("介绍")
+if state.get("readme") is None:
+    with open("README.md", "r", encoding="utf-8") as fh:
+        state.readme = fh.read()
 
-"""
-这是一个免费的资源上传平台，将会临时保持你上传的文件\n
-前身为`Packages`项目
-"""
+
+st.markdown(state.readme)
 
 st.divider()
 

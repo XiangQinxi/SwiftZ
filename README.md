@@ -1,23 +1,15 @@
-# SwiftZ
+# 📦SwiftZ 2
+
 https://swiftz.streamlit.app/
 
-> 原项目`Packages`
+> 原项目`Packages`已停止维护，本项目为其后续版本
 
-文件临时托管，使用`Streamlit`构建的应用程序。
+通过`Streamlit Cloud`平台实现文件、文本临时托管。
 
-## 感谢
-这里感谢`Streamlit Cloud`提供免费的社区平台！
+做这个主要还是有时候传输文件有点麻烦，就做了这个应用，方便自己也方便别人。祝**开源盛世**。
 
-还有以下依赖库感谢：
-`streamlit-extras`
+使用`Streamlit`构建的应用程序。
 
-`streamlit-shadcn-ui`
-提供优美的标签组件
+## V2版本有什么*新改变*？
 
-`filetype`
-为文件上传/下载的预览提供文件识别
-
-`pyperclip`
-
-`toml`
-配置文件读取
+1. 新增了用户相关功能
