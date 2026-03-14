@@ -5,8 +5,12 @@ import streamlit as st
 import api
 
 cookie = st.session_state.cookie_controller
-current_user_id = cookie.get("user_id")
 
+# 获取当前登录用户
+current_user_id = st.session_state.get("user_id") or cookie.get("user_id")
+current_password = st.session_state.get("password") or cookie.get("password")
+
+# 获取目标用户 ID
 target_user_id = st.query_params.get("user_id")
 if target_user_id:
     try:
@@ -14,19 +18,22 @@ if target_user_id:
     except (ValueError, TypeError):
         target_user_id = None
 
-if not api.verify_user_by_id(current_user_id, cookie.get("password")):
-    if target_user_id is None:
-        st.error("请先登录后再访问个人资料。")
-        time.sleep(1)
-        st.switch_page("login.py")
-        st.stop()
-
+# 获取目标用户信息
 target_info = api.get_user_info(target_user_id) if target_user_id else None
-is_self = target_user_id is None or target_user_id == current_user_id
+is_self = target_user_id is None or (current_user_id and target_user_id == current_user_id)
 
+# 检查用户是否存在
 if target_user_id is not None and target_info is None:
     st.error("用户不存在")
     st.stop()
+
+# 如果查看自己但未登录，跳转到登录
+if is_self and not api.verify_user_by_id(current_user_id, current_password):
+    st.error("请先登录后再访问个人资料。")
+    st.info("正在跳转到登录页...")
+    time.sleep(1)
+    st.query_params["redirect"] = "profile"
+    st.rerun()
 
 if target_user_id is None:
     st.title("个人资料")
@@ -86,16 +93,13 @@ if is_self:
                     st.error("两次输入的密码不一致")
                 else:
                     users = api.load_users()
-                    if users[current_user_id]["password"] != api.sha256_hash(
-                        old_password
-                    ):
+                    if users[current_user_id]["password"] != api.sha256_hash(old_password):
                         st.error("当前密码错误")
                     else:
-                        users[current_user_id]["password"] = api.sha256_hash(
-                            new_password
-                        )
+                        users[current_user_id]["password"] = api.sha256_hash(new_password)
                         api.save_users(users)
                         cookie.set("password", new_password)
+                        st.session_state.password = new_password
                         st.success("密码已修改，请重新登录以确保生效！")
                         time.sleep(1)
                         st.rerun()
@@ -115,10 +119,8 @@ else:
             with st.container(border=True):
                 st.write(f"**{pkg['name']}** · {pkg.get('file_count', 0)} 个文件")
                 st.caption(pkg.get("description") or "暂无描述")
-                if st.button(
-                    "查看", key=f"view_pkg_{pkg['name']}", use_container_width=True
-                ):
+                if st.button("查看", key=f"view_pkg_{pkg['name']}", use_container_width=True):
                     st.query_params["name"] = pkg["name"]
-                    st.switch_page("download.py")
+                    st.rerun()
         if len(user_packages) > 10:
             st.caption(f"还有 {len(user_packages) - 10} 个文件包...")

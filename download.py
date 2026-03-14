@@ -1,3 +1,6 @@
+import mimetypes
+import os
+
 import streamlit as st
 
 import api
@@ -82,23 +85,71 @@ if result:
             )
 
         st.divider()
-        st.markdown("### 单个文件下载")
+        st.markdown("### 单个文件操作")
+
         for file_info in file_list:
             file_name = file_info["name"]
-            cols = st.columns([4, 1, 1.5])
-            cols[0].write(file_name)
-            cols[1].caption(api.bytes_to_human_readable(file_info["size"]))
-            try:
-                file_bytes = api.read_package_file(package_id, password, file_name)
-            except Exception as exc:
-                cols[2].write("读取失败")
-                st.error(f"无法读取文件 {file_name}：{exc}")
-            else:
-                cols[2].download_button(
-                    "下载",
-                    data=file_bytes,
-                    file_name=file_name,
-                    mime="application/octet-stream",
-                    key=f"download::{package_id}::{file_name}",
-                    use_container_width=True,
-                )
+            file_size = file_info["size"]
+            file_ext = os.path.splitext(file_name)[1].lower()
+
+            with st.container(border=True):
+                file_col1, file_col2, file_col3 = st.columns([3, 1, 1])
+                file_col1.write(f"**{file_name}**")
+                file_col2.caption(api.bytes_to_human_readable(file_size))
+
+                try:
+                    file_bytes = api.read_package_file(package_id, password, file_name)
+                    mime_type, _ = mimetypes.guess_type(file_name)
+                    if mime_type is None:
+                        mime_type = "application/octet-stream"
+
+                    file_col3.download_button(
+                        "下载",
+                        data=file_bytes,
+                        file_name=file_name,
+                        mime=mime_type,
+                        key=f"download::{package_id}::{file_name}",
+                        use_container_width=True,
+                    )
+
+                    if file_col1.checkbox(f"预览 {file_name}", key=f"preview_toggle::{package_id}::{file_name}"):
+                        with st.expander(f"预览：{file_name}", expanded=True):
+                            if file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp')):
+                                st.image(file_bytes, caption=file_name)
+                            elif file_name.lower().endswith(('.mp4', '.webm', '.ogg', '.avi', '.mov')):
+                                st.video(file_bytes)
+                            elif file_name.lower().endswith(('.mp3', '.wav', '.ogg', '.flac', '.aac')):
+                                st.audio(file_bytes, format=mime_type)
+                            elif file_name.lower().endswith(('.txt', '.md', '.json', '.xml', '.yaml', '.yml', '.toml', '.ini', '.cfg', '.conf')):
+                                try:
+                                    text_content = file_bytes.decode('utf-8')
+                                    st.text_area("文本内容", value=text_content, height=300, disabled=True)
+                                except UnicodeDecodeError:
+                                    st.warning("无法以文本格式显示此文件")
+                            elif file_name.lower().endswith(('.py', '.js', '.ts', '.java', '.c', '.cpp', '.h', '.hpp', '.cs', '.go', '.rs', '.rb', '.php', '.swift', '.kt', '.scala', '.sh', '.bash', '.zsh', '.ps1', '.bat', '.cmd', '.sql', '.html', '.css', '.scss', '.sass', '.less', '.vue', '.jsx', '.tsx', '.json', '.yaml', '.yml', '.toml', '.xml', '.md', '.rst', '.tex', '.r', '.m', '.pl', '.lua', '.ex', '.exs', '.erl', '.hs', '.clj', '.fs', '.vb', '.fsx', '.fsi')):
+                                try:
+                                    code_content = file_bytes.decode('utf-8')
+                                    language = file_ext[1:] if file_ext else 'text'
+                                    if language == 'md':
+                                        language = 'markdown'
+                                    elif language in ('yml', 'yaml'):
+                                        language = 'yaml'
+                                    elif language in ('py', 'python'):
+                                        language = 'python'
+                                    elif language in ('js', 'javascript'):
+                                        language = 'javascript'
+                                    elif language in ('ts', 'typescript'):
+                                        language = 'typescript'
+                                    elif language in ('html', 'htm'):
+                                        language = 'html'
+                                    elif language in ('css', 'scss', 'sass', 'less'):
+                                        language = 'css'
+                                    st.code(code_content, language=language)
+                                except UnicodeDecodeError:
+                                    st.warning("无法以代码格式显示此文件")
+                            else:
+                                st.info("此文件类型暂不支持预览")
+
+                except Exception as exc:
+                    file_col2.write("读取失败")
+                    st.error(f"无法读取文件 {file_name}：{exc}")

@@ -35,9 +35,7 @@ with st.container(border=True):
         """
     )
 
-st.warning(
-    "本项目部署在 Streamlit Cloud。若站点长时间无访问，服务可能休眠并重置临时文件。请不要把 SwiftZ 当作长期网盘使用，也不要上传敏感数据。"
-)
+st.warning("本项目部署在 Streamlit Cloud。若站点长时间无访问，服务可能休眠并重置临时文件。请不要把 SwiftZ 当作长期网盘使用，也不要上传敏感数据。")
 
 with st.expander("查看项目简介 / README"):
     if st.session_state.get("readme") is None:
@@ -52,7 +50,7 @@ packages = api.get_shared_packages()
 if not packages:
     st.info("目前还没有公开分享的文件包，快去上传第一个吧！")
 else:
-    for package in packages:
+    for idx, package in enumerate(packages):
         with st.container(border=True):
             top_left, top_right = st.columns([4, 1])
             with top_left:
@@ -77,20 +75,14 @@ else:
             st.caption(" · ".join(meta))
 
             action_col1, action_col2, action_col3 = st.columns([1, 4, 2])
-            if action_col1.button(
-                "去获取", key=f"go::{package['name']}", use_container_width=True
-            ):
+            if action_col1.button("去获取", key=f"go_{package['name']}_{idx}", use_container_width=True):
                 st.query_params["name"] = package["name"]
-                st.switch_page("download.py")
+                st.rerun()
 
             if owner_user_id:
-                if action_col2.button(
-                    "查看发布者",
-                    key=f"owner::{owner_user_id}",
-                    use_container_width=True,
-                ):
+                if action_col2.button("查看发布者", key=f"owner_{package['name']}_{owner_user_id}_{idx}", use_container_width=True):
                     st.query_params["user_id"] = owner_user_id
-                    st.switch_page("profile.py")
+                    st.rerun()
 
             if not package.get("encrypted", True):
                 action_col3.success("无密码")
