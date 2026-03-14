@@ -3,10 +3,10 @@ import streamlit as st
 import api
 
 st.title("SwiftZ · 临时文件中转站")
-st.caption("把文件打包、加密、分享，用一个查询 ID 临时传输给别人。")
+st.caption("把文件打包、分享、下载，用一个查询 ID 临时传输给别人。")
 
 col1, col2, col3 = st.columns(3)
-col1.metric("存储方式", "ZIP 加密")
+col1.metric("存储方式", "ZIP 打包")
 col2.metric("支持内容", "多文件上传")
 col3.metric("使用场景", "临时分享 / 文件中转")
 
@@ -17,10 +17,10 @@ with st.container(border=True):
 SwiftZ 是一个基于 Streamlit 的轻量级临时文件托管工具，适合：
 - 临时传文件给朋友或同事
 - 分享多个文件的合集
-- 为文件设置独立提取密码
+- 为文件设置可选密码
 - 公开展示自己的分享内容
 
-上传时，文件会先被打包为 **加密 ZIP** 保存；下载时，系统会读取压缩包内容，并把原始文件提供给用户下载。
+上传时，文件会先被打包为 ZIP 保存；如果填写密码，则会以 **加密 ZIP** 存储。下载时，系统会读取压缩包内容，并把原始文件提供给用户下载。
         """
     )
 
@@ -29,15 +29,13 @@ with st.container(border=True):
     st.markdown(
         """
 1. 在“文件上传”页面选择一个或多个文件。
-2. 设置提取密码与查询 ID。
-3. 上传后，把 **查询 ID + 密码** 发给对方。
+2. 设置可选密码与查询 ID。
+3. 上传后，把 **查询 ID** 发给对方；如果设置了密码，再把密码一并告诉对方。
 4. 对方在“文件获取”页面输入对应信息后即可下载单个文件，或一键下载全部文件。
         """
     )
 
-st.warning(
-    "本项目部署在 Streamlit Cloud。若站点长时间无访问，服务可能休眠并重置临时文件。请不要把 SwiftZ 当作长期网盘使用，也不要上传敏感数据。"
-)
+st.warning("本项目部署在 Streamlit Cloud。若站点长时间无访问，服务可能休眠并重置临时文件。请不要把 SwiftZ 当作长期网盘使用，也不要上传敏感数据。")
 
 with st.expander("查看项目简介 / README"):
     if st.session_state.get("readme") is None:
@@ -63,11 +61,18 @@ else:
                 st.code(package["name"])
 
             meta = []
-            if package.get("file_count"):
-                meta.append(f"{package['file_count']} 个文件")
+            meta.append(f"发布者：{package.get('owner_name', '匿名用户')}")
+            meta.append(f"{package.get('file_count', 0)} 个文件")
+            meta.append("有密码" if package.get("encrypted", True) else "无密码")
             if package.get("created_at"):
                 meta.append(f"上传时间：{package['created_at']}")
-            if meta:
-                st.caption(" · ".join(meta))
+            st.caption(" · ".join(meta))
 
-            st.info("前往“文件获取”页面，输入上方查询 ID 和对应密码即可下载。")
+            action_col1, action_col2 = st.columns([1, 5])
+            if action_col1.button("去获取", key=f"go::{package['name']}", use_container_width=True):
+                st.query_params["name"] = package["name"]
+                st.switch_page("download.py")
+            if not package.get("encrypted", True):
+                action_col2.success("这个分享包无需密码，点击“去获取”后可直接查询。")
+            else:
+                action_col2.info("这是一个有密码的分享包，进入获取页面后还需要输入提取密码。")
