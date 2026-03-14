@@ -20,7 +20,9 @@ if target_user_id:
 
 # 获取目标用户信息
 target_info = api.get_user_info(target_user_id) if target_user_id else None
-is_self = target_user_id is None or (current_user_id and target_user_id == current_user_id)
+is_self = target_user_id is None or (
+    current_user_id and target_user_id == current_user_id
+)
 
 # 检查用户是否存在
 if target_user_id is not None and target_info is None:
@@ -93,10 +95,14 @@ if is_self:
                     st.error("两次输入的密码不一致")
                 else:
                     users = api.load_users()
-                    if users[current_user_id]["password"] != api.sha256_hash(old_password):
+                    if users[current_user_id]["password"] != api.sha256_hash(
+                        old_password
+                    ):
                         st.error("当前密码错误")
                     else:
-                        users[current_user_id]["password"] = api.sha256_hash(new_password)
+                        users[current_user_id]["password"] = api.sha256_hash(
+                            new_password
+                        )
                         api.save_users(users)
                         cookie.set("password", new_password)
                         st.session_state.password = new_password
@@ -119,7 +125,9 @@ else:
             with st.container(border=True):
                 st.write(f"**{pkg['name']}** · {pkg.get('file_count', 0)} 个文件")
                 st.caption(pkg.get("description") or "暂无描述")
-                if st.button("查看", key=f"view_pkg_{pkg['name']}", use_container_width=True):
+                if st.button(
+                    "查看", key=f"view_pkg_{pkg['name']}", use_container_width=True
+                ):
                     st.query_params["name"] = pkg["name"]
                     st.rerun()
         if len(user_packages) > 10:

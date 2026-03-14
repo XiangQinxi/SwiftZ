@@ -101,4 +101,6 @@ if submitted:
                     st.write(f"查询 ID：`{package_id}`")
                     st.write(f"密码状态：{'已加密' if encrypted else '无密码'}")
                     st.write("请妥善保存查询 ID；如果设置了密码，也请一并告知下载方。")
-                    st.info("现在可以前往\"文件获取\"页面测试下载效果，或在\"我的文件\"中继续管理。")
+                    st.info(
+                        '现在可以前往"文件获取"页面测试下载效果，或在"我的文件"中继续管理。'
+                    )

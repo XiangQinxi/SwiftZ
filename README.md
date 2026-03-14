@@ -1,73 +1,73 @@
 # 📦 SwiftZ
 
-**临时文件中转站** | [在线访问](https://swiftz.streamlit.app/)
+**Temporary File Exchange Station** | [Visit Online](https://swiftz.streamlit.app/)
 
-> 原项目 `Packages` 已停止维护，本项目为其后续版本。
-
----
-
-## 关于开发该项目
-这项目，前半部分是我自己敲出来的，后面关于文件获取部分，是我使用`ChatGPT5.4`、`MiniMax2.6`来辅助开发。
-原来的内容的确有点少，我让`AI`来补充了许多介绍。
-
-## 🔥 简介
-
-SwiftZ 是一个基于 **Streamlit** 构建的轻量级临时文件托管工具，通过 Streamlit Cloud 平台运行。
-
-你可以把它理解为「**简易版临时网盘**」：
-- 一次上传多个文件，打包成 ZIP
-- 可选设置密码（加密存储）
-- 生成一个唯一的「查询 ID」
-- 把 ID（和密码）发给对方，即可下载原始文件
-
-**适用场景**：
-- 临时给朋友、同事传文件
-- 分享资料合集（如课程笔记、素材包）
-- 快速中转大文件（不依赖微信/邮箱限制）
-- 公开分享自己的资源（可设为公开）
-
-> ⚠️ **注意**：本项目部署在 Streamlit Cloud，平台存在休眠机制。若站点长期无访问，可能会重置数据。**请勿将 SwiftZ 用作长期网盘或存储敏感数据。**
+> The original project `Packages` has been discontinued. This project is its successor.
 
 ---
 
-## ✨ 特性
+## About This Project
 
-| 功能 | 说明 |
-|------|------|
-| 多文件上传 | 一次上传多个文件，自动打包为 ZIP |
-| 可选密码 | 可选择是否设置提取密码 |
-| 加密存储 | 有密码时使用 AES-256 加密 ZIP |
-| 公开分享 | 可将文件包设为公开，展示在首页 |
-| 用户系统 | 支持注册登录，管理自己上传的文件 |
-| 管理后台 | 管理员可管理用户和所有文件包 |
+The first part of this project was developed by me, while the file retrieval functionality was developed with assistance from `ChatGPT 5.4` and `MiniMax 2.6`. The original content was somewhat limited, so I asked the AI to add more details.
+
+## 🔥 Introduction
+
+SwiftZ is a lightweight temporary file hosting tool built on **Streamlit**, running on the Streamlit Cloud platform.
+
+Think of it as a "**simple temporary cloud drive**":
+- Upload multiple files at once, packaged as ZIP
+- Optional password protection (encrypted storage)
+- Generate a unique "Query ID"
+- Share the ID (and password) with others to download the original files
+
+**Use Cases**:
+- Temporarily share files with friends or colleagues
+- Share resource collections (e.g., course notes, material packs)
+- Quickly transfer large files (without WeChat/email limitations)
+- Publicly share your resources (can be set to public)
+
+> ⚠️ **Note**: This project is deployed on Streamlit Cloud, which has a sleep mechanism. If the site has no visitors for an extended period, data may be reset. **Please do not use SwiftZ as a long-term cloud storage or for sensitive data.**
 
 ---
 
-## 🛠️ 技术栈
+## ✨ Features
 
-- **前端/UI**：Streamlit
-- **数据存储**：YAML 文件 + 本地 ZIP 包
-- **加密**：pyzipper（AES-256）
-- **部署**：Streamlit Cloud
+| Feature | Description |
+|---------|-------------|
+| Multi-file Upload | Upload multiple files at once, automatically packaged as ZIP |
+| Optional Password | Choose whether to set an extraction password |
+| Encrypted Storage | Use AES-256 encrypted ZIP when password is set |
+| Public Sharing | Set file packages as public, displayed on the homepage |
+| User System | Support registration and login, manage your uploaded files |
+| Admin Panel | Administrators can manage users and all file packages |
 
 ---
 
-## 📦 本地运行
+## 🛠️ Tech Stack
+
+- **Frontend/UI**: Streamlit
+- **Data Storage**: YAML files + local ZIP packages
+- **Encryption**: pyzipper (AES-256)
+- **Deployment**: Streamlit Cloud
+
+---
+
+## 📦 Local Setup
 
 ```bash
-# 1. 克隆项目
+# 1. Clone the project
 git clone https://github.com/XiangQinxi/SwiftZ.git
 cd SwiftZ
 
-# 2. 安装依赖
+# 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. 启动应用
+# 3. Run the application
 streamlit run main.py
 ```
 
 ---
 
-## 📄 许可证
+## 📄 License
 
-MIT License · 欢迎开源与二次开发 🎉
+MIT License · Open source and contributions welcome 🎉

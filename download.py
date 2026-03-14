@@ -112,38 +112,120 @@ if result:
                         use_container_width=True,
                     )
 
-                    if file_col1.checkbox(f"预览 {file_name}", key=f"preview_toggle::{package_id}::{file_name}"):
+                    if file_col1.checkbox(
+                        f"预览 {file_name}",
+                        key=f"preview_toggle::{package_id}::{file_name}",
+                    ):
                         with st.expander(f"预览：{file_name}", expanded=True):
-                            if file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp')):
+                            if file_name.lower().endswith(
+                                (".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp")
+                            ):
                                 st.image(file_bytes, caption=file_name)
-                            elif file_name.lower().endswith(('.mp4', '.webm', '.ogg', '.avi', '.mov')):
+                            elif file_name.lower().endswith(
+                                (".mp4", ".webm", ".ogg", ".avi", ".mov")
+                            ):
                                 st.video(file_bytes)
-                            elif file_name.lower().endswith(('.mp3', '.wav', '.ogg', '.flac', '.aac')):
+                            elif file_name.lower().endswith(
+                                (".mp3", ".wav", ".ogg", ".flac", ".aac")
+                            ):
                                 st.audio(file_bytes, format=mime_type)
-                            elif file_name.lower().endswith(('.txt', '.md', '.json', '.xml', '.yaml', '.yml', '.toml', '.ini', '.cfg', '.conf')):
+                            elif file_name.lower().endswith(
+                                (
+                                    ".txt",
+                                    ".md",
+                                    ".json",
+                                    ".xml",
+                                    ".yaml",
+                                    ".yml",
+                                    ".toml",
+                                    ".ini",
+                                    ".cfg",
+                                    ".conf",
+                                )
+                            ):
                                 try:
-                                    text_content = file_bytes.decode('utf-8')
-                                    st.text_area("文本内容", value=text_content, height=300, disabled=True)
+                                    text_content = file_bytes.decode("utf-8")
+                                    st.text_area(
+                                        "文本内容",
+                                        value=text_content,
+                                        height=300,
+                                        disabled=True,
+                                    )
                                 except UnicodeDecodeError:
                                     st.warning("无法以文本格式显示此文件")
-                            elif file_name.lower().endswith(('.py', '.js', '.ts', '.java', '.c', '.cpp', '.h', '.hpp', '.cs', '.go', '.rs', '.rb', '.php', '.swift', '.kt', '.scala', '.sh', '.bash', '.zsh', '.ps1', '.bat', '.cmd', '.sql', '.html', '.css', '.scss', '.sass', '.less', '.vue', '.jsx', '.tsx', '.json', '.yaml', '.yml', '.toml', '.xml', '.md', '.rst', '.tex', '.r', '.m', '.pl', '.lua', '.ex', '.exs', '.erl', '.hs', '.clj', '.fs', '.vb', '.fsx', '.fsi')):
+                            elif file_name.lower().endswith(
+                                (
+                                    ".py",
+                                    ".js",
+                                    ".ts",
+                                    ".java",
+                                    ".c",
+                                    ".cpp",
+                                    ".h",
+                                    ".hpp",
+                                    ".cs",
+                                    ".go",
+                                    ".rs",
+                                    ".rb",
+                                    ".php",
+                                    ".swift",
+                                    ".kt",
+                                    ".scala",
+                                    ".sh",
+                                    ".bash",
+                                    ".zsh",
+                                    ".ps1",
+                                    ".bat",
+                                    ".cmd",
+                                    ".sql",
+                                    ".html",
+                                    ".css",
+                                    ".scss",
+                                    ".sass",
+                                    ".less",
+                                    ".vue",
+                                    ".jsx",
+                                    ".tsx",
+                                    ".json",
+                                    ".yaml",
+                                    ".yml",
+                                    ".toml",
+                                    ".xml",
+                                    ".md",
+                                    ".rst",
+                                    ".tex",
+                                    ".r",
+                                    ".m",
+                                    ".pl",
+                                    ".lua",
+                                    ".ex",
+                                    ".exs",
+                                    ".erl",
+                                    ".hs",
+                                    ".clj",
+                                    ".fs",
+                                    ".vb",
+                                    ".fsx",
+                                    ".fsi",
+                                )
+                            ):
                                 try:
-                                    code_content = file_bytes.decode('utf-8')
-                                    language = file_ext[1:] if file_ext else 'text'
-                                    if language == 'md':
-                                        language = 'markdown'
-                                    elif language in ('yml', 'yaml'):
-                                        language = 'yaml'
-                                    elif language in ('py', 'python'):
-                                        language = 'python'
-                                    elif language in ('js', 'javascript'):
-                                        language = 'javascript'
-                                    elif language in ('ts', 'typescript'):
-                                        language = 'typescript'
-                                    elif language in ('html', 'htm'):
-                                        language = 'html'
-                                    elif language in ('css', 'scss', 'sass', 'less'):
-                                        language = 'css'
+                                    code_content = file_bytes.decode("utf-8")
+                                    language = file_ext[1:] if file_ext else "text"
+                                    if language == "md":
+                                        language = "markdown"
+                                    elif language in ("yml", "yaml"):
+                                        language = "yaml"
+                                    elif language in ("py", "python"):
+                                        language = "python"
+                                    elif language in ("js", "javascript"):
+                                        language = "javascript"
+                                    elif language in ("ts", "typescript"):
+                                        language = "typescript"
+                                    elif language in ("html", "htm"):
+                                        language = "html"
+                                    elif language in ("css", "scss", "sass", "less"):
+                                        language = "css"
                                     st.code(code_content, language=language)
                                 except UnicodeDecodeError:
                                     st.warning("无法以代码格式显示此文件")
