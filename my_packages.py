@@ -5,19 +5,23 @@ import streamlit as st
 import api
 
 cookie = st.session_state.cookie_controller
-user_id = cookie.get("user_id")
+
+# 优先从 session_state 获取，再从 cookie 获取
+user_id = st.session_state.get("user_id") or cookie.get("user_id")
+password = st.session_state.get("password") or cookie.get("password")
 
 st.title("我的文件")
 
-if not api.verify_user_by_id(user_id, cookie.get("password")):
+if not api.verify_user_by_id(user_id, password):
     st.error("请先登录后再查看自己的文件。")
+    st.info("正在跳转到登录页...")
     time.sleep(1)
-    st.switch_page("login.py")
+    st.rerun()
 
 packages = api.get_user_packages(user_id)
 
 if not packages:
-    st.info("你还没有上传过文件包，快去“文件上传”页面试试吧。")
+    st.info("你还没有上传过文件包，快去\"文件上传\"页面试试吧。")
 else:
     st.caption(f"共 {len(packages)} 个文件包")
     for package in packages:
@@ -59,7 +63,7 @@ else:
                 "前往获取页面", key=f"go_{package_id}", use_container_width=True
             ):
                 st.query_params["name"] = package_id
-                st.switch_page("download.py")
+                st.rerun()
             if action2.button(
                 "删除文件包",
                 key=f"delete_{package_id}",

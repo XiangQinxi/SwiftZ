@@ -3,6 +3,7 @@ import time
 import streamlit as st
 
 import api
+from logger import log_access, log_error
 
 cookie = st.session_state.cookie_controller
 
@@ -24,8 +25,12 @@ with st.form("login_form"):
             user_id = api.login_1user(username, password)
             if user_id is None:
                 st.error("登录失败！用户名或密码错误")
+                log_access("login_failed", details=f"username: {username}")
             else:
                 st.success(f"登录成功，您的用户ID为{user_id}")
+                
+                # 记录登录成功
+                log_access("login_success", user_id=user_id, details=f"username: {username}")
 
                 # 同时设置 cookie 和 session_state
                 cookie.set("username", username)

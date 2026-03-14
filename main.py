@@ -2,6 +2,10 @@ import streamlit as st
 from streamlit_cookies_controller import CookieController
 
 import api
+from logger import install_error_handler, log_access, log_error
+
+# 安装全局错误处理器
+install_error_handler()
 
 api.init_datas()
 
