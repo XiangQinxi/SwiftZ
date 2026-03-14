@@ -1,7 +1,6 @@
 import time
 
 import streamlit as st
-from streamlit_cookies_controller import CookieController
 
 import api
 
@@ -38,6 +37,3 @@ with st.form("register_form"):
                 cookie.set("user_id", user_id)
                 time.sleep(1)
                 st.switch_page("home.py")
-
-cookie.set("password", None)
-cookie.set("user_id", None)

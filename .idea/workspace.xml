@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a43b61e9-14cd-46a9-b622-bdb29a41dd6a" name="更改" comment="2.0pre6 正在重构中">
-      <change afterPath="$PROJECT_DIR$/2.py" afterDir="false" />
+    <list default="true" id="a43b61e9-14cd-46a9-b622-bdb29a41dd6a" name="更改" comment="2.0pre7 正在重构中">
       <change afterPath="$PROJECT_DIR$/download.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datas/packages.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/home.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/login.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/register.py" beforeDir="false" afterPath="$PROJECT_DIR$/register.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/upload.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -251,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772870920553</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="2.0pre7 正在重构中">
+      <option name="closed" value="true" />
+      <created>1773460181281</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1773460181281</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -276,6 +280,7 @@
     <MESSAGE value="2.0pre4 正在重构中" />
     <MESSAGE value="2.0pre5 正在重构中" />
     <MESSAGE value="2.0pre6 正在重构中" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.0pre6 正在重构中" />
+    <MESSAGE value="2.0pre7 正在重构中" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.0pre7 正在重构中" />
   </component>
 </project>

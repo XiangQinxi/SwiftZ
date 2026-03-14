@@ -29,7 +29,6 @@ else:
     user_tab = [login_page, register_page]
 
 
-
 pg = st.navigation(
     {
         ":material/home: 首页": [home_page],
