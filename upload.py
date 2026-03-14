@@ -27,15 +27,29 @@ uploaded_files = st.file_uploader("选择要上传的文件", accept_multiple_fi
 
 if uploaded_files:
     st.subheader("待上传文件")
-    st.table([
-        {"文件名": file.name, "大小": api.bytes_to_human_readable(file.size), "类型": file.type or "未知"}
-        for file in uploaded_files
-    ])
+    st.table(
+        [
+            {
+                "文件名": file.name,
+                "大小": api.bytes_to_human_readable(file.size),
+                "类型": file.type or "未知",
+            }
+            for file in uploaded_files
+        ]
+    )
 
 with st.form("upload_form"):
-    description = st.text_area("文件描述", placeholder="介绍这些文件的用途、内容或注意事项")
-    password = st.text_input("提取密码（可留空）", type="password", placeholder="不填写则为无密码包")
-    package_id = st.text_input("查询 ID", value=state.upload_default_id, help="仅支持字母、数字、下划线和短横线，长度 3-32 位")
+    description = st.text_area(
+        "文件描述", placeholder="介绍这些文件的用途、内容或注意事项"
+    )
+    password = st.text_input(
+        "提取密码（可留空）", type="password", placeholder="不填写则为无密码包"
+    )
+    package_id = st.text_input(
+        "查询 ID",
+        value=state.upload_default_id,
+        help="仅支持字母、数字、下划线和短横线，长度 3-32 位",
+    )
     share = st.checkbox("公开分享", help="勾选后，其他用户可在首页看到这个文件包")
     submitted = st.form_submit_button("开始上传", use_container_width=True)
 
@@ -53,8 +67,18 @@ if submitted:
         st.error("该查询 ID 已存在，请更换一个新的 ID")
     else:
         try:
-            package_path, file_entries, encrypted = api.package_zip(package_id, uploaded_files, password)
-            api.add_1package(package_id, package_path, user_id=cookie.get("user_id"), description=description, share=share, files=file_entries, encrypted=encrypted)
+            package_path, file_entries, encrypted = api.package_zip(
+                package_id, uploaded_files, password
+            )
+            api.add_1package(
+                package_id,
+                package_path,
+                user_id=cookie.get("user_id"),
+                description=description,
+                share=share,
+                files=file_entries,
+                encrypted=encrypted,
+            )
         except Exception as exc:
             st.error(f"上传失败：{exc}")
         else:
@@ -66,4 +90,6 @@ if submitted:
                 st.write(f"查询 ID：`{package_id}`")
                 st.write(f"密码状态：{'已加密' if encrypted else '无密码'}")
                 st.write("请妥善保存查询 ID；如果设置了密码，也请一并告知下载方。")
-                st.info("现在可以前往“文件获取”页面测试下载效果，或在“我的文件”中继续管理。")
+                st.info(
+                    "现在可以前往“文件获取”页面测试下载效果，或在“我的文件”中继续管理。"
+                )

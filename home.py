@@ -28,14 +28,16 @@ with st.container(border=True):
     st.subheader("如何使用？")
     st.markdown(
         """
-1. 在“文件上传”页面选择一个或多个文件。
+1. 在"文件上传"页面选择一个或多个文件。
 2. 设置可选密码与查询 ID。
 3. 上传后，把 **查询 ID** 发给对方；如果设置了密码，再把密码一并告诉对方。
-4. 对方在“文件获取”页面输入对应信息后即可下载单个文件，或一键下载全部文件。
+4. 对方在"文件获取"页面输入对应信息后即可下载单个文件，或一键下载全部文件。
         """
     )
 
-st.warning("本项目部署在 Streamlit Cloud。若站点长时间无访问，服务可能休眠并重置临时文件。请不要把 SwiftZ 当作长期网盘使用，也不要上传敏感数据。")
+st.warning(
+    "本项目部署在 Streamlit Cloud。若站点长时间无访问，服务可能休眠并重置临时文件。请不要把 SwiftZ 当作长期网盘使用，也不要上传敏感数据。"
+)
 
 with st.expander("查看项目简介 / README"):
     if st.session_state.get("readme") is None:
@@ -61,18 +63,36 @@ else:
                 st.code(package["name"])
 
             meta = []
-            meta.append(f"发布者：{package.get('owner_name', '匿名用户')}")
+            owner_user_id = package.get("user_id")
+            if owner_user_id:
+                owner_info = api.get_user_info(owner_user_id)
+                owner_name = owner_info["username"] if owner_info else "匿名用户"
+                meta.append(f"发布者：{owner_name}")
+            else:
+                meta.append(f"发布者：匿名用户")
             meta.append(f"{package.get('file_count', 0)} 个文件")
             meta.append("有密码" if package.get("encrypted", True) else "无密码")
             if package.get("created_at"):
                 meta.append(f"上传时间：{package['created_at']}")
             st.caption(" · ".join(meta))
 
-            action_col1, action_col2 = st.columns([1, 5])
-            if action_col1.button("去获取", key=f"go::{package['name']}", use_container_width=True):
+            action_col1, action_col2, action_col3 = st.columns([1, 4, 2])
+            if action_col1.button(
+                "去获取", key=f"go::{package['name']}", use_container_width=True
+            ):
                 st.query_params["name"] = package["name"]
                 st.switch_page("download.py")
+
+            if owner_user_id:
+                if action_col2.button(
+                    "查看发布者",
+                    key=f"owner::{owner_user_id}",
+                    use_container_width=True,
+                ):
+                    st.query_params["user_id"] = owner_user_id
+                    st.switch_page("profile.py")
+
             if not package.get("encrypted", True):
-                action_col2.success("这个分享包无需密码，点击“去获取”后可直接查询。")
+                action_col3.success("无密码")
             else:
-                action_col2.info("这是一个有密码的分享包，进入获取页面后还需要输入提取密码。")
+                action_col3.info("有密码")

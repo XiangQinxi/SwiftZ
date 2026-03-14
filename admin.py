@@ -40,7 +40,9 @@ with st.expander("用户管理", expanded=True):
         if readonly:
             st.code(api.load_users_content(), "yaml")
         else:
-            users_content = st.text_area("编辑用户数据", api.load_users_content(), height=300)
+            users_content = st.text_area(
+                "编辑用户数据", api.load_users_content(), height=300
+            )
             if st.button("保存用户数据"):
                 api.save_users(yaml.safe_load(users_content))
                 st.success("用户数据已保存！")
@@ -51,7 +53,9 @@ with st.expander("用户管理", expanded=True):
         user_packages = api.get_user_packages(user_id)
         with st.container(border=True):
             head1, head2, head3 = st.columns([5, 2, 1])
-            head1.write(f"**{user_info['username']}** (ID: {user_id}) · 角色：{user_info['role']}")
+            head1.write(
+                f"**{user_info['username']}** (ID: {user_id}) · 角色：{user_info['role']}"
+            )
             head2.caption(f"文件包：{len(user_packages)}")
             with head3.popover("", icon=":material/more_vert:"):
                 new_role = st.selectbox(
@@ -60,7 +64,9 @@ with st.expander("用户管理", expanded=True):
                     index=api.USER_ROLES.index(user_info["role"]),
                     key=f"role_{user_id}",
                 )
-                if st.button("保存权限", key=f"role_save_{user_id}", use_container_width=True):
+                if st.button(
+                    "保存权限", key=f"role_save_{user_id}", use_container_width=True
+                ):
                     users[user_id]["role"] = new_role
                     api.save_users(users)
                     st.success("权限已更新")
@@ -70,7 +76,11 @@ with st.expander("用户管理", expanded=True):
                 if int(user_id) == int(cookie.get("user_id")):
                     st.caption("⚠️ 无法删除当前管理员")
                 else:
-                    if st.button("删除该账户", key=f"user_delete_{user_id}", use_container_width=True):
+                    if st.button(
+                        "删除该账户",
+                        key=f"user_delete_{user_id}",
+                        use_container_width=True,
+                    ):
                         del users[user_id]
                         api.save_users(users)
                         st.success("账户已删除")
@@ -88,7 +98,9 @@ with st.expander("文件包管理", expanded=True):
         if readonly:
             st.code(api.load_packages_content(), "yaml")
         else:
-            packages_content = st.text_area("编辑文件包数据", api.load_packages_content(), height=300)
+            packages_content = st.text_area(
+                "编辑文件包数据", api.load_packages_content(), height=300
+            )
             if st.button("保存文件包数据"):
                 api.save_packages(yaml.safe_load(packages_content) or {})
                 st.success("文件包数据已保存！")
@@ -101,17 +113,27 @@ with st.expander("文件包管理", expanded=True):
         for package in packages:
             package_id = package["name"]
             with st.container(border=True):
-                st.write(f"**{package_id}** · 所属用户：{api.get_username(package.get('user_id'))}")
-                st.caption(f"{package.get('file_count', 0)} 个文件 · {'有密码' if package.get('encrypted', True) else '无密码'} · {'公开' if package.get('share') else '私有'} · {package.get('created_at', '未知时间')}")
+                st.write(
+                    f"**{package_id}** · 所属用户：{api.get_username(package.get('user_id'))}"
+                )
+                st.caption(
+                    f"{package.get('file_count', 0)} 个文件 · {'有密码' if package.get('encrypted', True) else '无密码'} · {'公开' if package.get('share') else '私有'} · {package.get('created_at', '未知时间')}"
+                )
                 st.write(package.get("description") or "暂无描述")
 
                 with st.form(f"admin_pkg_{package_id}"):
-                    description = st.text_area("描述", value=package.get("description") or "")
+                    description = st.text_area(
+                        "描述", value=package.get("description") or ""
+                    )
                     share = st.checkbox("公开分享", value=package.get("share", False))
-                    submitted = st.form_submit_button("保存文件包修改", use_container_width=True)
+                    submitted = st.form_submit_button(
+                        "保存文件包修改", use_container_width=True
+                    )
                 if submitted:
                     try:
-                        api.update_package(package_id, description=description, share=share)
+                        api.update_package(
+                            package_id, description=description, share=share
+                        )
                     except Exception as exc:
                         st.error(f"保存失败：{exc}")
                     else:
@@ -120,10 +142,16 @@ with st.expander("文件包管理", expanded=True):
                         st.rerun()
 
                 act1, act2 = st.columns(2)
-                if act1.button("前往获取", key=f"admin_go_{package_id}", use_container_width=True):
+                if act1.button(
+                    "前往获取", key=f"admin_go_{package_id}", use_container_width=True
+                ):
                     st.query_params["name"] = package_id
                     st.switch_page("download.py")
-                if act2.button("删除文件包", key=f"admin_delete_{package_id}", use_container_width=True):
+                if act2.button(
+                    "删除文件包",
+                    key=f"admin_delete_{package_id}",
+                    use_container_width=True,
+                ):
                     try:
                         api.delete_package(package_id)
                     except Exception as exc:

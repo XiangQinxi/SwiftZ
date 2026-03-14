@@ -6,8 +6,8 @@ import secrets
 import string
 import zipfile
 from datetime import datetime
-from pathlib import Path
 from hashlib import sha256
+from pathlib import Path
 
 import pyzipper
 import streamlit as st
@@ -124,7 +124,9 @@ def find_user_id_by_name(username):
 def verify_user(username, password) -> bool:
     users = load_users()
     for user_info in users.values():
-        if user_info["username"] == username and user_info["password"] == sha256_hash(password):
+        if user_info["username"] == username and user_info["password"] == sha256_hash(
+            password
+        ):
             return True
     return False
 
@@ -155,7 +157,9 @@ def register_1user(username, password) -> int | None:
 def login_1user(username, password) -> int | None:
     users = load_users()
     for user_id, user_info in users.items():
-        if user_info["username"] == username and user_info["password"] == sha256_hash(password):
+        if user_info["username"] == username and user_info["password"] == sha256_hash(
+            password
+        ):
             return user_id
     return None
 
@@ -235,7 +239,9 @@ def get_package_info(name: str):
     return load_packages().get(name.strip())
 
 
-def get_package_file_path(name: str | None = None, package_info: dict | None = None) -> Path:
+def get_package_file_path(
+    name: str | None = None, package_info: dict | None = None
+) -> Path:
     package_info = package_info or get_package_info(name)
     if not package_info:
         raise FileNotFoundError("文件包不存在")
@@ -287,19 +293,37 @@ def package_zip(name: str, files, password: str | None = None):
             for file in files:
                 if file is None:
                     continue
-                archive_name = _deduplicate_filename(getattr(file, "name", "unnamed"), used_names)
+                archive_name = _deduplicate_filename(
+                    getattr(file, "name", "unnamed"), used_names
+                )
                 data = file.getvalue()
                 zipf.writestr(archive_name, data)
-                file_entries.append({"name": archive_name, "size": len(data), "type": getattr(file, "type", "application/octet-stream")})
+                file_entries.append(
+                    {
+                        "name": archive_name,
+                        "size": len(data),
+                        "type": getattr(file, "type", "application/octet-stream"),
+                    }
+                )
     else:
-        with zipfile.ZipFile(archive_path, "w", compression=zipfile.ZIP_DEFLATED) as zipf:
+        with zipfile.ZipFile(
+            archive_path, "w", compression=zipfile.ZIP_DEFLATED
+        ) as zipf:
             for file in files:
                 if file is None:
                     continue
-                archive_name = _deduplicate_filename(getattr(file, "name", "unnamed"), used_names)
+                archive_name = _deduplicate_filename(
+                    getattr(file, "name", "unnamed"), used_names
+                )
                 data = file.getvalue()
                 zipf.writestr(archive_name, data)
-                file_entries.append({"name": archive_name, "size": len(data), "type": getattr(file, "type", "application/octet-stream")})
+                file_entries.append(
+                    {
+                        "name": archive_name,
+                        "size": len(data),
+                        "type": getattr(file, "type", "application/octet-stream"),
+                    }
+                )
 
     if not file_entries:
         archive_path.unlink(missing_ok=True)
@@ -308,7 +332,15 @@ def package_zip(name: str, files, password: str | None = None):
     return archive_path, file_entries, encrypted
 
 
-def add_1package(name: str, path: Path, user_id: int = None, description: str = "", share: bool = True, files: list[dict] | None = None, encrypted: bool = True):
+def add_1package(
+    name: str,
+    path: Path,
+    user_id: int = None,
+    description: str = "",
+    share: bool = True,
+    files: list[dict] | None = None,
+    encrypted: bool = True,
+):
     package_id = (name or "").strip()
     files = files or []
     packages = load_packages()
@@ -327,7 +359,9 @@ def add_1package(name: str, path: Path, user_id: int = None, description: str = 
     return packages[package_id]
 
 
-def update_package(package_id: str, *, description: str | None = None, share: bool | None = None):
+def update_package(
+    package_id: str, *, description: str | None = None, share: bool | None = None
+):
     packages = load_packages()
     if package_id not in packages:
         raise FileNotFoundError("文件包不存在")
@@ -363,7 +397,9 @@ def get_user_packages(user_id: int | None):
             item.setdefault("name", package_id)
             item.setdefault("file_count", len(item.get("files", [])))
             results.append(item)
-    results.sort(key=lambda x: (x.get("created_at", ""), x.get("name", "")), reverse=True)
+    results.sort(
+        key=lambda x: (x.get("created_at", ""), x.get("name", "")), reverse=True
+    )
     return results
 
 
@@ -375,7 +411,9 @@ def get_all_packages():
         item.setdefault("name", package_id)
         item.setdefault("file_count", len(item.get("files", [])))
         results.append(item)
-    results.sort(key=lambda x: (x.get("created_at", ""), x.get("name", "")), reverse=True)
+    results.sort(
+        key=lambda x: (x.get("created_at", ""), x.get("name", "")), reverse=True
+    )
     return results
 
 
@@ -383,8 +421,12 @@ def get_site_stats():
     users = load_users()
     packages = load_packages()
     shared_count = sum(1 for info in packages.values() if info.get("share"))
-    encrypted_count = sum(1 for info in packages.values() if info.get("encrypted", True))
-    file_count = sum(info.get("file_count", len(info.get("files", []))) for info in packages.values())
+    encrypted_count = sum(
+        1 for info in packages.values() if info.get("encrypted", True)
+    )
+    file_count = sum(
+        info.get("file_count", len(info.get("files", []))) for info in packages.values()
+    )
     total_size = 0
     for info in packages.values():
         for file_info in info.get("files", []):
@@ -439,9 +481,25 @@ def get_package_file_list(name: str, password: str | None = None):
     if encrypted:
         with pyzipper.AESZipFile(package_path, "r") as zf:
             zf.setpassword((password or "").encode("utf-8"))
-            return [{"name": m.filename, "size": m.file_size, "compressed_size": m.compress_size} for m in zf.infolist() if not m.is_dir()]
+            return [
+                {
+                    "name": m.filename,
+                    "size": m.file_size,
+                    "compressed_size": m.compress_size,
+                }
+                for m in zf.infolist()
+                if not m.is_dir()
+            ]
     with zipfile.ZipFile(package_path, "r") as zf:
-        return [{"name": m.filename, "size": m.file_size, "compressed_size": m.compress_size} for m in zf.infolist() if not m.is_dir()]
+        return [
+            {
+                "name": m.filename,
+                "size": m.file_size,
+                "compressed_size": m.compress_size,
+            }
+            for m in zf.infolist()
+            if not m.is_dir()
+        ]
 
 
 def get_1package_list(name: str, password: str | None = None):
@@ -472,9 +530,13 @@ def read_package_files(name: str, password: str | None = None) -> dict[str, byte
     if encrypted:
         with pyzipper.AESZipFile(package_path, "r") as zf:
             zf.setpassword((password or "").encode("utf-8"))
-            return {m.filename: zf.read(m.filename) for m in zf.infolist() if not m.is_dir()}
+            return {
+                m.filename: zf.read(m.filename) for m in zf.infolist() if not m.is_dir()
+            }
     with zipfile.ZipFile(package_path, "r") as zf:
-        return {m.filename: zf.read(m.filename) for m in zf.infolist() if not m.is_dir()}
+        return {
+            m.filename: zf.read(m.filename) for m in zf.infolist() if not m.is_dir()
+        }
 
 
 def build_download_zip(name: str, password: str | None = None) -> bytes:
@@ -497,5 +559,8 @@ def get_shared_packages():
             item.setdefault("file_count", len(item.get("files", [])))
             item["owner_name"] = get_username(item.get("user_id"))
             shared_packages.append(item)
-    shared_packages.sort(key=lambda item: (item.get("created_at", ""), item.get("name", "")), reverse=True)
+    shared_packages.sort(
+        key=lambda item: (item.get("created_at", ""), item.get("name", "")),
+        reverse=True,
+    )
     return shared_packages

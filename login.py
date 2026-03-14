@@ -26,8 +26,15 @@ with st.form("login_form"):
                 st.error("登录失败！用户名或密码错误")
             else:
                 st.success(f"登录成功，您的用户ID为{user_id}")
+
+                # 同时设置 cookie 和 session_state
                 cookie.set("username", username)
                 cookie.set("password", password)
                 cookie.set("user_id", user_id)
+
+                st.session_state.user_id = user_id
+                st.session_state.username = username
+                st.session_state.password = password
+
                 time.sleep(1)
                 st.switch_page("home.py")

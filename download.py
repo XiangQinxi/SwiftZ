@@ -46,7 +46,12 @@ if submitted:
                 state.download_result = None
                 st.error(f"获取失败：{exc}")
             else:
-                state.download_result = {"package_id": package_id, "password": password, "package_info": package_info, "file_list": file_list}
+                state.download_result = {
+                    "package_id": package_id,
+                    "password": password,
+                    "package_info": package_info,
+                    "file_list": file_list,
+                }
                 st.success("文件包读取成功，下面可以直接下载。")
 
 result = state.get("download_result")
@@ -59,14 +64,22 @@ if result:
     with st.container(border=True):
         st.subheader(f"文件包：{package_id}")
         st.write(package_info.get("description") or "暂无文件描述。")
-        st.caption(f"共 {len(file_list)} 个文件 · {'有密码' if package_info.get('encrypted', True) else '无密码'}")
+        st.caption(
+            f"共 {len(file_list)} 个文件 · {'有密码' if package_info.get('encrypted', True) else '无密码'}"
+        )
 
         try:
             download_zip = api.build_download_zip(package_id, password)
         except Exception as exc:
             st.error(f"生成整包下载失败：{exc}")
         else:
-            st.download_button("下载全部文件（ZIP）", data=download_zip, file_name=f"{package_id}-files.zip", mime="application/zip", use_container_width=True)
+            st.download_button(
+                "下载全部文件（ZIP）",
+                data=download_zip,
+                file_name=f"{package_id}-files.zip",
+                mime="application/zip",
+                use_container_width=True,
+            )
 
         st.divider()
         st.markdown("### 单个文件下载")
@@ -81,4 +94,11 @@ if result:
                 cols[2].write("读取失败")
                 st.error(f"无法读取文件 {file_name}：{exc}")
             else:
-                cols[2].download_button("下载", data=file_bytes, file_name=file_name, mime="application/octet-stream", key=f"download::{package_id}::{file_name}", use_container_width=True)
+                cols[2].download_button(
+                    "下载",
+                    data=file_bytes,
+                    file_name=file_name,
+                    mime="application/octet-stream",
+                    key=f"download::{package_id}::{file_name}",
+                    use_container_width=True,
+                )
