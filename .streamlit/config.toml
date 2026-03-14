@@ -1,5 +1,5 @@
 [server]
-enableStaticServing = true
+enableStaticServing = false
 runOnSave = true
 
 [[theme.fontFaces]]
