@@ -5,7 +5,7 @@ from streamlit_cookies_controller import CookieController
 
 import api
 
-cookie = CookieController()
+cookie = st.session_state.cookie_controller
 
 st.title("SwiftZ2 · 注册账号")
 

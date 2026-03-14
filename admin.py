@@ -1,11 +1,13 @@
-import streamlit as st
-import api
-import time
-import yaml
 import datetime
+import time
+
+import streamlit as st
+import yaml
 from streamlit_cookies_controller import CookieController
 
-cookie = CookieController()
+import api
+
+cookie = st.session_state.cookie_controller
 
 users = api.load_users()
 
@@ -30,7 +32,9 @@ if api.is_admin(cookie.get("user_id")):
             if st.checkbox("只读", True):
                 st.code(api.load_users_content(), "yaml")
             else:
-                users_content = st.text_area("编辑用户数据", api.load_users_content(), height=300)
+                users_content = st.text_area(
+                    "编辑用户数据", api.load_users_content(), height=300
+                )
                 if st.button("保存"):
                     api.save_users(yaml.load(users_content, Loader=yaml.FullLoader))
                     st.success("用户数据已保存！")
@@ -38,8 +42,15 @@ if api.is_admin(cookie.get("user_id")):
                     st.rerun()
 
         for user_id, user_info in users.items():
-            with st.container(border=True, horizontal=True, horizontal_alignment="left", vertical_alignment="center"):
-                st.write(f"{user_info['username']} ( ID: {user_id} ): {user_info['role']}")
+            with st.container(
+                border=True,
+                horizontal=True,
+                horizontal_alignment="left",
+                vertical_alignment="center",
+            ):
+                st.write(
+                    f"{user_info['username']} ( ID: {user_id} ): {user_info['role']}"
+                )
                 st.space(size="stretch")
                 with st.popover("", icon=":material/more_vert:", key=f"{user_id}.more"):
 
@@ -50,7 +61,14 @@ if api.is_admin(cookie.get("user_id")):
                         time.sleep(1)
                         st.rerun()
 
-                    st.selectbox("修改权限", api.USER_ROLES, key=f"{user_id}.role", accept_new_options=False, on_change=update_role, index=api.USER_ROLES.index(user_info["role"]))
+                    st.selectbox(
+                        "修改权限",
+                        api.USER_ROLES,
+                        key=f"{user_id}.role",
+                        accept_new_options=False,
+                        on_change=update_role,
+                        index=api.USER_ROLES.index(user_info["role"]),
+                    )
 
                     if st.button("删除该账户", key=f"{user_id}.delete"):
                         del users[user_id]
@@ -58,7 +76,6 @@ if api.is_admin(cookie.get("user_id")):
                         st.success("账户已删除！")
                         time.sleep(1)
                         st.rerun()
-
 
     with st.expander("工具", expanded=True):
         text_to_hash_input = st.text_input("输入要加密的文本")

@@ -4,20 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a43b61e9-14cd-46a9-b622-bdb29a41dd6a" name="更改" comment="2.0pre5 正在重构中">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/upload.py" afterDir="false" />
+    <list default="true" id="a43b61e9-14cd-46a9-b622-bdb29a41dd6a" name="更改" comment="2.0pre6 正在重构中">
+      <change afterPath="$PROJECT_DIR$/2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/download.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.streamlit/config.toml" beforeDir="false" afterPath="$PROJECT_DIR$/.streamlit/config.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datas/packages.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/datas/packages.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datas/users.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/datas/users.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datas/packages.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/home.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/login.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logout.py" beforeDir="false" afterPath="$PROJECT_DIR$/logout.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/register.py" beforeDir="false" afterPath="$PROJECT_DIR$/register.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/upload.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,21 +61,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.test.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/SwiftZ",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/SwiftZ&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\SwiftZ" />
@@ -86,7 +86,30 @@
       <recent name="D:\SwiftZ" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.1">
+    <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="SwiftZ" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SwiftZ" />
       <option name="ENV_FILES" value="" />
@@ -112,6 +135,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.1" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -219,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772861829102</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="2.0pre6 正在重构中">
+      <option name="closed" value="true" />
+      <created>1772870920553</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1772870920553</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -243,6 +275,7 @@
     <MESSAGE value="2.0pre3 正在重构中" />
     <MESSAGE value="2.0pre4 正在重构中" />
     <MESSAGE value="2.0pre5 正在重构中" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.0pre5 正在重构中" />
+    <MESSAGE value="2.0pre6 正在重构中" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.0pre6 正在重构中" />
   </component>
 </project>

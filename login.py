@@ -1,11 +1,10 @@
 import time
 
 import streamlit as st
-from streamlit_cookies_controller import CookieController
 
 import api
 
-cookie = CookieController()
+cookie = st.session_state.cookie_controller
 
 st.title("SwiftZ2 · 登录账号")
 

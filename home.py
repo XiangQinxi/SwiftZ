@@ -1,5 +1,7 @@
 import streamlit as st
 
+import api
+
 state = st.session_state
 
 if state.get("readme") is None:
@@ -16,3 +18,10 @@ st.warning(
 )
 
 st.subheader("看看用户们的分享🤓")
+
+packages = api.load_packages()
+for package in packages:
+    if packages[package]["share"]:
+        with st.container(border=True):
+            st.subheader(packages[package]["name"])
+            st.write(packages[package]["description"])

@@ -1,20 +1,186 @@
 [server]
 enableStaticServing = true
-runOnSave=true
+runOnSave = true
+
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/Inter_18pt-Regular.ttf"
+style = "normal"
+weight = 400
+
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/Inter_18pt-Medium.ttf"
+style = "normal"
+weight = 500
+
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/Inter_18pt-SemiBold.ttf"
+style = "normal"
+weight = 600
+
+[[theme.fontFaces]]
+family = "Inter"
+url = "app/static/Inter_18pt-Bold.ttf"
+style = "normal"
+weight = 700
+
+[[theme.fontFaces]]
+family = "JetBrainsMono"
+url = "app/static/JetBrainsMono-Regular.ttf"
+style = "normal"
+weight = 400
+
+[[theme.fontFaces]]
+family = "JetBrainsMono"
+url = "app/static/JetBrainsMono-Medium.ttf"
+style = "normal"
+weight = 500
 
 [theme]
-# Professional color palette
-primaryColor = "#f7630c"             # Deep navy blue - trust, stability, authority
-backgroundColor = "#fefefe"          # Off-white - softer than pure white, easier on eyes
-secondaryBackgroundColor = "#f8fafc" # Very light gray - subtle distinction
-textColor = "#1f2937"                # Charcoal gray - professional, highly readable
-linkColor = "#f7630c"                # Slightly lighter navy for links
-borderColor = "#d1d5db"              # Medium gray borders - clear definition
-showWidgetBorder = true
-baseRadius = "0.6px"              # Subtle rounding - professional but not sharp
-codeBackgroundColor = "#f3f4f6"      # Light gray code background
+# =========================================================
+# 全局基础设置
+# 这些配置对整个主题系统生效，不能分别写到 [theme.light]/[theme.dark]
+# =========================================================
+
+# 默认基底：用户首次进入时的基础主题倾向
+base = "light"
+
+# 侧边栏是否显示边界线
 showSidebarBorder = true
 
-[theme.sidebar]
-backgroundColor = "#f1f5f9"          # Light blue-gray - sophisticated sidebar
-secondaryBackgroundColor = "#e5e7eb" # Slightly darker for content sections
+# ---------------------------------------------------------
+# 图表配色（全局共享）
+# Streamlit 目前这类图表颜色配置不区分 light / dark
+# 所以这里采用一套中性黑白灰方案
+# ---------------------------------------------------------
+chartCategoricalColors = ["#111111", "#333333", "#666666", "#999999", "#BBBBBB"]
+chartSequentialColors = ["#111111", "#2A2A2A", "#444444", "#666666", "#888888", "#AAAAAA", "#D5D5D5"]
+chartDivergingColors = ["#111111", "#666666", "#F5F5F5", "#999999", "#222222"]
+
+[theme.light]
+# =========================================================
+# Light 模式：主区域
+# 黑白极简、留白干净、圆角柔和
+# =========================================================
+
+# ---- 交互强调 ----
+primaryColor = "#000000"
+linkColor = "#111111"
+
+# ---- 页面背景层级 ----
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3F3F3"
+
+# ---- 文本与代码 ----
+textColor = "#0F0F0F"
+codeBackgroundColor = "#F7F7F7"
+codeTextColor = "#111111"
+
+# ---- 圆角与边框 ----
+baseRadius = "large"
+buttonRadius = "full"
+borderColor = "#EFEFEF"
+dataframeBorderColor = "#E5E5E5"
+dataframeHeaderBackgroundColor = "#F7F7F7"
+showWidgetBorder = false
+
+# ---- 基础色板（保持黑白灰体系）----
+redColor = "#111111"
+orangeColor = "#333333"
+yellowColor = "#555555"
+greenColor = "#777777"
+blueColor = "#999999"
+violetColor = "#BBBBBB"
+grayColor = "#808080"
+
+[theme.light.sidebar]
+# =========================================================
+# Light 模式：侧边栏
+# 比主区域略深一点，增强层次
+# =========================================================
+
+# ---- 交互强调 ----
+primaryColor = "#111111"
+linkColor = "#111111"
+
+# ---- 页面背景层级 ----
+backgroundColor = "#FAFAFA"
+secondaryBackgroundColor = "#F2F2F2"
+
+# ---- 文本与代码 ----
+textColor = "#111111"
+codeBackgroundColor = "#F5F5F5"
+codeTextColor = "#111111"
+
+# ---- 圆角与边框 ----
+baseRadius = "large"
+buttonRadius = "full"
+borderColor = "#E5E5E5"
+dataframeBorderColor = "#E5E5E5"
+dataframeHeaderBackgroundColor = "#F5F5F5"
+showWidgetBorder = true
+
+[theme.dark]
+# =========================================================
+# Dark 模式：主区域
+# 不是纯黑，而是深灰黑，避免视觉压迫
+# =========================================================
+
+# ---- 交互强调 ----
+primaryColor = "#2B2B2B"
+linkColor = "#F5F5F5"
+
+# ---- 页面背景层级 ----
+backgroundColor = "#0E0E0E"
+secondaryBackgroundColor = "#181818"
+
+# ---- 文本与代码 ----
+textColor = "#F3F3F3"
+codeBackgroundColor = "#141414"
+codeTextColor = "#F5F5F5"
+
+# ---- 圆角与边框 ----
+baseRadius = "large"
+buttonRadius = "full"
+borderColor = "#2A2A2A"
+dataframeBorderColor = "#2F2F2F"
+dataframeHeaderBackgroundColor = "#161616"
+showWidgetBorder = false
+
+# ---- 基础色板（暗色下仍保持中性）----
+redColor = "#F5F5F5"
+orangeColor = "#D9D9D9"
+yellowColor = "#BFBFBF"
+greenColor = "#A6A6A6"
+blueColor = "#8C8C8C"
+violetColor = "#737373"
+grayColor = "#999999"
+
+[theme.dark.sidebar]
+# =========================================================
+# Dark 模式：侧边栏
+# 比主区域略亮一点点，保留分区感
+# =========================================================
+
+# ---- 交互强调 ----
+primaryColor = "#2B2B2B"
+linkColor = "#F5F5F5"
+
+# ---- 页面背景层级 ----
+backgroundColor = "#141414"
+secondaryBackgroundColor = "#1C1C1C"
+
+# ---- 文本与代码 ----
+textColor = "#F3F3F3"
+codeBackgroundColor = "#1A1A1A"
+codeTextColor = "#F5F5F5"
+
+# ---- 圆角与边框 ----
+baseRadius = "large"
+buttonRadius = "full"
+borderColor = "#2E2E2E"
+dataframeBorderColor = "#303030"
+dataframeHeaderBackgroundColor = "#1A1A1A"
+showWidgetBorder = true

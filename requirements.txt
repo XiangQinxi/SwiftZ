@@ -4,3 +4,4 @@ filetype
 pyperclip
 toml
 streamlit-cookies-controller
+pyzipper
