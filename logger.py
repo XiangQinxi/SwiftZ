@@ -1,3 +1,4 @@
+""""""
 """
 错误日志模块
 提供统一的错误日志记录和查看功能
@@ -7,6 +8,7 @@ import io
 import logging
 import os
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 from logging.handlers import RotatingFileHandler
@@ -169,9 +171,10 @@ def get_error_count() -> dict:
         
         today_count = sum(1 for line in lines if line.startswith(today))
         
-        # 简单计算本周（最近7天）
-        week_count = sum(1 for line in lines if today[:4] in line[:4] and 
-                        any(day in line for day in [today[-2:], f"{int(today[-2:])-1:02d}"]))
+        # 计算本周（最近7天）
+        from datetime import timedelta
+        week_ago = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
+        week_count = sum(1 for line in lines if line[:10] >= week_ago)
         
         return {
             "total": total,
@@ -190,8 +193,6 @@ def clear_old_logs(days: int = 7):
     Args:
         days: 保留最近多少天的日志
     """
-    import time
-    
     cutoff = time.time() - (days * 24 * 60 * 60)
     
     for log_file in [ERROR_LOG_FILE, ACCESS_LOG_FILE, DEBUG_LOG_FILE]:

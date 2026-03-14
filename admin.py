@@ -124,10 +124,21 @@ with st.expander("用户管理", expanded=True):
                         key=f"user_delete_{user_id}",
                         use_container_width=True,
                     ):
+                        # 如果被删除的用户当前正在登录，清除其Cookie
+                        deleted_user_session = int(user_id) == int(current_user_id)
+                        
                         del users[user_id]
                         api.save_users(users)
                         st.success("账户已删除")
                         log_access("delete_user", user_id=user_id, details=f"删除用户 {user_id}")
+                        
+                        # 如果删除了当前登录用户，清除Cookie并跳转
+                        if deleted_user_session:
+                            cookie.remove("user_id")
+                            cookie.remove("password")
+                            cookie.remove("username")
+                            st.session_state.clear()
+                            st.rerun()
                         time.sleep(0.6)
                         st.rerun()
 

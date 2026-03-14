@@ -335,7 +335,7 @@ def package_zip(name: str, files, password: str | None = None):
 def add_1package(
     name: str,
     path: Path,
-    user_id: int = None,
+    user_id: int | None = None,
     description: str = "",
     share: bool = True,
     files: list[dict] | None = None,
