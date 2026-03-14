@@ -23,6 +23,7 @@ def greet_time():
         return "下午好"
     return "晚上好"
 
+
 stats = api.get_site_stats()
 st.success(f"管理员今天{greet_time()}！")
 
@@ -49,29 +50,34 @@ with st.expander("用户管理", expanded=True):
     for user_id, user_info in users.items():
         user_packages = api.get_user_packages(user_id)
         with st.container(border=True):
-            head1, head2 = st.columns([5, 2])
+            head1, head2, head3 = st.columns([5, 2, 1])
             head1.write(f"**{user_info['username']}** (ID: {user_id}) · 角色：{user_info['role']}")
             head2.caption(f"文件包：{len(user_packages)}")
-            st.caption(user_info.get("profile", {}).get("description", "暂无简介"))
-
-            col1, col2 = st.columns(2)
-            new_role = col1.selectbox("修改权限", api.USER_ROLES, index=api.USER_ROLES.index(user_info["role"]), key=f"role_{user_id}")
-            if col1.button("保存权限", key=f"role_save_{user_id}", use_container_width=True):
-                users[user_id]["role"] = new_role
-                api.save_users(users)
-                st.success("权限已更新")
-                time.sleep(0.6)
-                st.rerun()
-
-            if col2.button("删除该账户", key=f"user_delete_{user_id}", use_container_width=True):
-                if int(user_id) == int(cookie.get("user_id")):
-                    st.error("不能删除当前登录的管理员账户")
-                else:
-                    del users[user_id]
+            with head3.popover("", icon=":material/more_vert:"):
+                new_role = st.selectbox(
+                    "修改权限",
+                    api.USER_ROLES,
+                    index=api.USER_ROLES.index(user_info["role"]),
+                    key=f"role_{user_id}",
+                )
+                if st.button("保存权限", key=f"role_save_{user_id}", use_container_width=True):
+                    users[user_id]["role"] = new_role
                     api.save_users(users)
-                    st.success("账户已删除")
+                    st.success("权限已更新")
                     time.sleep(0.6)
                     st.rerun()
+
+                if int(user_id) == int(cookie.get("user_id")):
+                    st.caption("⚠️ 无法删除当前管理员")
+                else:
+                    if st.button("删除该账户", key=f"user_delete_{user_id}", use_container_width=True):
+                        del users[user_id]
+                        api.save_users(users)
+                        st.success("账户已删除")
+                        time.sleep(0.6)
+                        st.rerun()
+
+            st.caption(user_info.get("profile", {}).get("description", "暂无简介"))
 
 with st.expander("文件包管理", expanded=True):
     packages = api.get_all_packages()
