@@ -55,9 +55,9 @@ showSidebarBorder = true
 # Streamlit 目前这类图表颜色配置不区分 light / dark
 # 所以这里采用一套中性黑白灰方案
 # ---------------------------------------------------------
-chartCategoricalColors = ["#111111", "#333333", "#666666", "#999999", "#BBBBBB"]
-chartSequentialColors = ["#111111", "#2A2A2A", "#444444", "#666666", "#888888", "#AAAAAA", "#D5D5D5"]
-chartDivergingColors = ["#111111", "#666666", "#F5F5F5", "#999999", "#222222"]
+chartCategoricalColors = ["#111111", "#333333", "#555555", "#777777", "#999999", "#BBBBBB", "#DDDDDD", "#CCCCCC", "#AAAAAA", "#888888"]
+chartSequentialColors = ["#111111", "#2A2A2A", "#444444", "#555555", "#666666", "#777777", "#888888", "#999999", "#AAAAAA", "#BBBBBB"]
+chartDivergingColors = ["#111111", "#444444", "#777777", "#AAAAAA", "#CCCCCC", "#DDDDDD", "#EEEEEE", "#999999", "#666666", "#333333"]
 
 [theme.light]
 # =========================================================
