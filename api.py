@@ -176,6 +176,36 @@ def get_username(user_id: int | None) -> str:
     return users[user_id]["username"]
 
 
+def get_user_info(user_id: int | None) -> dict | None:
+    user_id = _normalize_user_id(user_id)
+    if user_id is None:
+        return None
+    users = load_users()
+    if user_id not in users:
+        return None
+    return {
+        "user_id": user_id,
+        "username": users[user_id].get("username"),
+        "role": users[user_id].get("role"),
+        "description": users[user_id].get("profile", {}).get("description", ""),
+    }
+
+
+def update_user_profile(user_id: int | None, description: str | None = None) -> bool:
+    user_id = _normalize_user_id(user_id)
+    if user_id is None:
+        return False
+    users = load_users()
+    if user_id not in users:
+        return False
+    if description is not None:
+        if "profile" not in users[user_id]:
+            users[user_id]["profile"] = {}
+        users[user_id]["profile"]["description"] = description.strip()
+    save_users(users)
+    return True
+
+
 def load_packages():
     init_datas()
     return _safe_load_yaml(PACKAGES_DATA_DIR, DEFAULT_PACKAGES)

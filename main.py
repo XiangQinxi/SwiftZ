@@ -14,13 +14,14 @@ admin_page = st.Page("admin.py", title="管理员配置", icon=":material/settin
 upload_page = st.Page("upload.py", title="文件上传", icon=":material/upload:")
 download_page = st.Page("download.py", title="文件获取", icon=":material/download:")
 my_packages_page = st.Page("my_packages.py", title="我的文件", icon=":material/folder_managed:")
+profile_page = st.Page("profile.py", title="个人资料", icon=":material/person:")
 
 if "cookie_controller" not in st.session_state:
     st.session_state.cookie_controller = CookieController()
 cookie = st.session_state.cookie_controller
 
 if api.verify_user_by_id(cookie.get("user_id"), cookie.get("password")):
-    user_tab = [my_packages_page]
+    user_tab = [profile_page, my_packages_page]
     if api.is_admin(cookie.get("user_id")):
         user_tab.append(admin_page)
     user_tab.extend([login_other_page, logout_page])
